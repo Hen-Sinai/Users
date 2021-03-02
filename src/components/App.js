@@ -21,11 +21,11 @@ const searchFilter = [
 const App = () => {
 	const [selected, setSelected] = useState(searchFilter[0]);
 	const [users, search] = useUsers(`${selected.value}`);
-	const [selectedUser, setSelectedUser] = useState([]);
+	const [selectedUser, setSelectedUser] = useState(null);
 
 	return (
 		<React.Fragment>
-			<div className='searchBar ui grid' style={{ margin: '7% 0 0 20%' }}>
+			<div className='searchBar ui grid' style={{ margin: '7% 0 0 25%' }}>
 				<div className='ui row'>
 					<div className='two wide column' style={{ padding: '0' }}>
 						<SearchBar onFormSubmit={search} filter={selected} />
@@ -36,15 +36,11 @@ const App = () => {
 				</div>
 			</div>
 			<div className='userList ui grid' style={{ padding: '0', margin: '0' }}>
-				<div className='ui row' style={{ padding: '0', marginLeft: '20%' }}>
-					<div className='twenty wide column' style={{ width: '26%' }}>
+				<div className='ui row' style={{ padding: '0', marginLeft: '24.5%' }}>
+					<div className='twenty wide column' style={{ width: '27%' }}>
 						<UserList users={users} onUserSelect={setSelectedUser} filter={selected.value} />
 					</div>
-				</div>
-			</div>
-			<div className='userDetails  ui grid' style={{ padding: '0', marginTop: '0' }}>
-				<div className='ui row' style={{ padding: '0', marginLeft: '20%' }}>
-					<div className='twenty wide column' style={{ width: '26%' }}>
+					<div className='twenty wide column' style={{ width: '27%' }}>
 						<UserDetails user={selectedUser} />
 					</div>
 				</div>

@@ -1,27 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const userDetail = (user) => {
+const style = {
+	display: 'block',
+	margin: '6% 0 0 3%',
+};
+
+const UserDetail = ({ user }) => {
+	const [open, setOpen] = useState(false);
+
+	const capitalizeFirstLetter = (string) => {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	};
+
+	const crateLine = (parameter, info) => {
+		return (
+			<div className={parameter} style={style}>
+				<span style={{ fontWeight: 'bold' }}> {`${capitalizeFirstLetter(parameter)}: `} </span>
+				<span> {info} </span>
+			</div>
+		);
+	};
+
+	const showAddress = () => {
+		if (open) {
+			return (
+				<React.Fragment>
+					<div className='content active'>
+						{crateLine('city', user.name)}
+						{crateLine('street', user.name)}
+						{crateLine('zipcode', user.name)}
+					</div>
+				</React.Fragment>
+			);
+		} else return;
+	};
+
 	const showData = () => {
 		if (user) {
 			return (
 				<div>
-					{console.log(user)}
-					<span className='name'> {`Name: ${user.name}`} </span>
-					<span className='user-name'> {`UserName: ${user.username}`} </span>
-					<span className='phone'> {`Phone: ${user.phone}`} </span>
-					<span className='website'> {`Website: ${user.website}`} </span>
-
-					{/* <div class='accordion ui'>
-						<div class='active title'>
-							<i aria-hidden='true' class='dropdown icon' />
-							{'Address:'}
-							<div class='content active'>
-								<span className='city'> {`City: ${user.address.city}`} </span>
-								<span className='street'> {`Street: ${user.address.street}`} </span>
-								<span className='zip-code'> {`ZipCode: ${user.address.zipcode}`} </span>
-							</div>
+					{crateLine('name', user.name)}
+					{crateLine('username', user.username)}
+					{crateLine('phone', user.phone)}
+					{crateLine('email', user.email)}
+					{crateLine('website', user.website)}
+					<div className='accordion ui'>
+						<div className={`ui ${open ? 'visible active' : ''} title`} style={style} onClick={() => setOpen(!open)}>
+							<i aria-hidden='true' className='dropdown icon' />
+							<span style={{ fontWeight: 'bold' }}> {'Address:'} </span>
+							{showAddress()}
 						</div>
-					</div> */}
+					</div>
 				</div>
 			);
 		} else {
@@ -32,4 +61,4 @@ const userDetail = (user) => {
 	return <div>{showData()}</div>;
 };
 
-export default userDetail;
+export default UserDetail;
