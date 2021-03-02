@@ -10,16 +10,20 @@ const useUsers = (searchProp) => {
 				query: term,
 			},
 		});
+
 		const indexOfProperty = Object.keys(data[0]).indexOf(searchProp);
 
 		const filterResults = () => {
 			const mappedUsers = data.map((user) => {
 				if (term) {
-					if (Object.values(user)[indexOfProperty].toLowerCase().includes(term)) {
-						return Object.values(user)[indexOfProperty];
+					if (
+						Object.values(user)[indexOfProperty].toLowerCase().includes(term) ||
+						Object.values(user)[indexOfProperty].includes(term)
+					) {
+						return user;
 					}
 				} else {
-					return Object.values(user)[indexOfProperty];
+					return user;
 				}
 				return null;
 			});
