@@ -54,7 +54,7 @@ const UserDetail = ({ user }) => {
 				</div>
 			);
 		} else {
-			return <h1> Choose User Please </h1>;
+			return <h1 style={{ justifyContent: 'center' }}> Choose User Please </h1>;
 		}
 	};
 
